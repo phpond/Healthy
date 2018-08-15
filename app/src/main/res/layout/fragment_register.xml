@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:padding="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <EditText
+            android:drawableLeft="@drawable/person"
+            android:drawableTint="@color/colorButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/user_id"
+            android:inputType="text" />
+
+        <EditText
+            android:drawableLeft="@drawable/name"
+            android:drawableTint="@color/colorButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/name"
+            android:inputType="text" />
+
+        <EditText
+            android:drawableLeft="@drawable/age"
+            android:drawableTint="@color/colorButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/age"
+            android:inputType="text" />
+
+        <EditText
+            android:drawableLeft="@drawable/password"
+            android:drawableTint="@color/colorButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/password"
+            android:inputType="text" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/btn_regis"
+            android:background="@color/colorPrimary"
+            />
+
+
+    </LinearLayout>
+    </ScrollView>
+
+
+</android.support.constraint.ConstraintLayout>

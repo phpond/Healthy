@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:paddingTop="7dp"
+        android:paddingLeft="10dp"
+        android:text="BMI"
+        android:background="@color/colorPrimary"
+        />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:padding="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+
+
+            <EditText
+                android:paddingTop="40dp"
+                android:drawableLeft="@drawable/top"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/height"
+                />
+
+            <EditText
+                android:drawableLeft="@drawable/bottom"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/weight"
+                />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/btn_cal"
+                android:background="@color/colorAccent"
+
+                />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</android.support.constraint.ConstraintLayout>
