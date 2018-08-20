@@ -13,8 +13,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
+        <FrameLayout
+            android:id="@+id/regis_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></FrameLayout>
 
         <EditText
+            android:id="@+id/register_user_id"
             android:drawableLeft="@drawable/person"
             android:drawableTint="@color/colorButton"
             android:layout_width="match_parent"
@@ -23,6 +28,7 @@
             android:inputType="text" />
 
         <EditText
+            android:id="@+id/register_name"
             android:drawableLeft="@drawable/name"
             android:drawableTint="@color/colorButton"
             android:layout_width="match_parent"
@@ -31,6 +37,7 @@
             android:inputType="text" />
 
         <EditText
+            android:id="@+id/register_age"
             android:drawableLeft="@drawable/age"
             android:drawableTint="@color/colorButton"
             android:layout_width="match_parent"
@@ -39,6 +46,7 @@
             android:inputType="text" />
 
         <EditText
+            android:id="@+id/register_password"
             android:drawableLeft="@drawable/password"
             android:drawableTint="@color/colorButton"
             android:layout_width="match_parent"
@@ -47,6 +55,7 @@
             android:inputType="text" />
 
         <Button
+            android:id="@+id/register_register_btn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/btn_regis"

@@ -5,28 +5,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:layout_editor_absoluteY="25dp">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
     <LinearLayout
-        android:padding="80dp"
+        android:padding="20dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
 
+        <FrameLayout
+            android:id="@+id/login_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></FrameLayout>
+
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="168dp"
+        android:layout_width="250dp"
         android:layout_height="200dp"
         android:layout_gravity="top|center"
         app:srcCompat="@drawable/salad"/>
 
     <EditText
         android:drawableLeft="@drawable/person"
-        android:id="@+id/user_id"
-        android:layout_width="wrap_content"
+        android:id="@+id/login_user_id"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="text|textPersonName"
@@ -34,27 +40,26 @@
 
     <EditText
         android:drawableLeft="@drawable/password"
-        android:id="@+id/password"
-        android:layout_width="217dp"
-        android:layout_height="47dp"
+        android:id="@+id/login_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPassword"
         android:hint="@string/password"/>
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="214dp"
-        android:layout_height="45dp"
+        android:id="@+id/login_login_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="Login" />
 
-    <TextView
-        android:layout_marginTop="10dp"
-        android:textColor="@color/colorPrimaryDark"
-        android:layout_gravity="end"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/btn_regis"
-        />
+        <TextView
+            android:id="@+id/login_register_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="Register New Account"
+            />
 
     </LinearLayout>
     </ScrollView>

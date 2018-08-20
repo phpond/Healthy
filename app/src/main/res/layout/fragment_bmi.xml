@@ -3,15 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <FrameLayout
+        android:id="@+id/bmi_view"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:paddingTop="7dp"
-        android:paddingLeft="10dp"
-        android:text="BMI"
-        android:background="@color/colorPrimary"
-        />
-
+        android:layout_height="match_parent"></FrameLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -28,27 +23,48 @@
 
 
             <EditText
+                android:id="@+id/bmi_height"
                 android:paddingTop="40dp"
                 android:drawableLeft="@drawable/top"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/height"
+                android:inputType="number"
                 />
 
             <EditText
+                android:id="@+id/bmi_weight"
                 android:drawableLeft="@drawable/bottom"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/weight"
+                android:inputType="number"
                 />
 
             <Button
+                android:id="@+id/bmi_cal_btn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/btn_cal"
                 android:background="@color/colorAccent"
 
                 />
+
+            <TextView
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="50dp"
+                android:textAlignment="center"
+                android:text="BMI" />
+
+            <TextView
+                android:id="@+id/bmi_result"
+                android:layout_width="match_parent"
+                android:layout_height="66dp"
+                android:hint="0"
+                android:textSize="30dp"
+                android:textAlignment="center" />
 
         </LinearLayout>
     </ScrollView>
