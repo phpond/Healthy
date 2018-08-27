@@ -39,8 +39,8 @@ public class LoginFragment extends Fragment{
                     Toast.makeText(getActivity(), "กรุณาระบุuser or password", Toast.LENGTH_SHORT).show();
                     Log.d("USER", "USER OR PASSWORD IS EMPTY");
                 }else if(_userIdStr.equals("admin") && _passwordStr.equals("admin")){
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view , new BMIFragment()).addToBackStack(null).commit();
-                    Log.d("USER", "“GOTO BMI");
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view , new MenuFragment()).addToBackStack(null).commit();
+                    Log.d("USER", "“GOTO MENU1");
                 }else{
                     Toast.makeText(getActivity(), "“user or password ไม่ถูกต้อง", Toast.LENGTH_SHORT).show();
                     Log.d("USER", "INVALID USER OR PASSWORD");

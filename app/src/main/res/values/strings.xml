@@ -8,4 +8,7 @@
     <string name="height">Height(cm)</string>
     <string name="weight">Weight(kg)</string>
     <string name="btn_cal">CALCULATE</string>
+    <string name="day">วันที่ชั่ง</string>
+    <string name="weigth_day">น้ำหนักที่ชั่ง</string>
+    <string name="save">บันทึก</string>
 </resources>

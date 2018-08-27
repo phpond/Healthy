@@ -22,6 +22,11 @@ public class BMIFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        initCal();
+        initBack();
+    }
+
+    public void initCal(){
         Button _calBtn = getView().findViewById(R.id.bmi_cal_btn);
         _calBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,6 +42,17 @@ public class BMIFragment extends Fragment {
                     _total.setText(total.toString());
                     Log.d("BMI", "BMI IS VALUE"+total);
                 }
+            }
+        });
+    }
+
+    public void initBack(){
+        TextView _backbtn = getView().findViewById(R.id.bmi_back_btn);
+        _backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("BMI", "BACK TO MENU");
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new MenuFragment()).addToBackStack(null).commit();
             }
         });
     }
