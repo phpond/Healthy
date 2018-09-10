@@ -2,11 +2,33 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-            <ListView
-                android:id="@+id/weight_list"
+            <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-            </ListView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <Button
+                        android:id="@+id/weight_add_weight_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Add Weight"
+                        android:layout_gravity="center"
+                        android:padding="20dp"
+                        />
+                </LinearLayout>
+
+            </ScrollView>
+
+    <ListView
+        android:id="@+id/weight_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="70dp">
+    </ListView>
 
 </android.support.constraint.ConstraintLayout>

@@ -11,4 +11,5 @@
     <string name="day">วันที่ชั่ง</string>
     <string name="weigth_day">น้ำหนักที่ชั่ง</string>
     <string name="save">บันทึก</string>
+    <string name="email">E-Mail</string>
 </resources>

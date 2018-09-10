@@ -1,6 +1,7 @@
 package com.example.lab203_07.healthy;
 
 
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,7 +13,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class RegisterFragment extends Fragment {
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -31,22 +39,52 @@ public class RegisterFragment extends Fragment {
         _registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String _userId = ((EditText)(getView().findViewById(R.id.register_user_id))).getText().toString();
-                String _name = ((EditText)(getView().findViewById(R.id.register_name))).getText().toString();
-                String _age = ((EditText)(getView().findViewById(R.id.register_age))).getText().toString();
+                String _email = ((EditText)(getView().findViewById(R.id.register_email))).getText().toString();
                 String _password = ((EditText)(getView().findViewById(R.id.register_password))).getText().toString();
+                String _rePassword = ((EditText)(getView().findViewById(R.id.register_re_password))).getText().toString();
 
-                if(_userId.isEmpty() || _name.isEmpty() || _age.isEmpty() || _password.isEmpty()){
-                    Toast.makeText(getActivity(), "กรุณาระบุข้อมูลให้ครบถ้วน", Toast.LENGTH_SHORT).show();
-                    Log.d("REGISTER", "FIELD NAME IS EMPTY");
-                }else if(_userId.equals("admin")){
-                    Toast.makeText(getActivity(), "user นี้มีอยู่ในระบบแล้ว", Toast.LENGTH_SHORT).show();
-                    Log.d("REGISTER", "USER ALREADY EXIST");
+                if(_password.length() < 6){
+                    Toast.makeText(getActivity(), "รหัสผ่านต้องมากกว่า 6 ตัวอักษร", Toast.LENGTH_SHORT).show();
+                    Log.d("REGISTER", "PASSWORD LESS 6 CHAR");
+                }else if(_password.equals(_rePassword) == false){
+                    Toast.makeText(getActivity(), "Password และ Re-Password ไม่ตรงกัน", Toast.LENGTH_SHORT).show();
+                    Log.d("REGISTER", "PASS NOT EQUAL RE-PASS");
                 }else{
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new BMIFragment()).addToBackStack(null).commit();
-                    Log.d("REGISTER", "GOTO BMI");
+
+                    //register
+                    regisFirebase(_email,_password);
+                    //confirm email
+                    sendVerifiedEmail(mAuth.getCurrentUser());
                 }
             }
         });
+    }
+
+    void sendVerifiedEmail(FirebaseUser _user) {
+        _user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d("REGISTER", "SEND VERIFY SUCCESS");
+                gotoLoginFrag();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getActivity(),"ERROR", Toast.LENGTH_SHORT).show();
+                Log.d("REGISTER", "SEND VERIFY FIAL");
+            }
+        });
+    }
+
+    void regisFirebase(String _email, String _password){
+        mAuth.createUserWithEmailAndPassword(_email,_password)
+                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {@Override public void onSuccess(AuthResult authResult) { Log.d("REGISTER", "REGISTER SUCCESS"); }})
+                .addOnFailureListener(new OnFailureListener() {@Override public void onFailure(@NonNull Exception e) {Log.d("REGISTER", "REGISTER FAIL");}});
+    }
+
+    void gotoLoginFrag(){
+        //go to loginFrag
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new LoginFragment()).addToBackStack(null).commit();
+        Log.d("REGISTER", "GOTO Login");
     }
 }

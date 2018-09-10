@@ -29,10 +29,12 @@ public class WeightAdapter extends ArrayAdapter {
         View _weightItem = LayoutInflater.from(context).inflate(R.layout.fragment_weight_item, parent, false);
         TextView _date = _weightItem.findViewById(R.id.weight_item_date);
         TextView _weight = _weightItem.findViewById(R.id.weight_item_weight);
+        TextView _status = _weightItem.findViewById(R.id.weight_item_status);
 
         Weight _row = weights.get(position);
         _date.setText(_row.getDate());
-        _weight.setText(_row.getWeight());
+        _weight.setText(Integer.toString( _row.getWeight()));
+        _status.setText(_row.getStatus());
         return _weightItem; //ข้อมูลที่ต้องการแสดง ณ ตำแหน่งนั้น
     }
 }
