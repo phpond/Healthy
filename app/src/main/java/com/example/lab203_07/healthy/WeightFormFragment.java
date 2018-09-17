@@ -46,11 +46,10 @@ public class WeightFormFragment extends Fragment {
                 String _weight = ((EditText)(getView().findViewById(R.id.weight_form_weight))).getText().toString();
                 String _uid = _mAuth.getCurrentUser().getUid();
 
-                Weight _weights = new Weight(_date, Integer.parseInt(_weight), "UP");
-
                 if(_date.isEmpty() || _weight.isEmpty()){
                     Toast.makeText(getActivity(),"กรุณาใส่ข้อมูลให้ครบ",Toast.LENGTH_SHORT).show();
                 }else {
+                    Weight _weights = new Weight(_date, Integer.parseInt(_weight), "UP");
                     _firestore.collection("“myfitness”").document(_uid)
                             .collection("weight").document(_date)
                             .set(_weights)

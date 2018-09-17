@@ -49,15 +49,28 @@ public class RegisterFragment extends Fragment {
                 }else if(_password.equals(_rePassword) == false){
                     Toast.makeText(getActivity(), "Password และ Re-Password ไม่ตรงกัน", Toast.LENGTH_SHORT).show();
                     Log.d("REGISTER", "PASS NOT EQUAL RE-PASS");
+                }else if(_email.isEmpty() || _password.isEmpty() || _rePassword.isEmpty()){
+                    Toast.makeText(getActivity(), "กรุณากรอกข้อมูลให้ครบ", Toast.LENGTH_SHORT).show();
+                    Log.d("REGISTER", "EMPTY");
                 }else{
-
                     //register
                     regisFirebase(_email,_password);
-                    //confirm email
-                    sendVerifiedEmail(mAuth.getCurrentUser());
+
                 }
             }
         });
+    }
+
+
+    void regisFirebase(String _email, String _password){
+        mAuth.createUserWithEmailAndPassword(_email,_password)
+                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {@Override public void onSuccess(AuthResult authResult) {
+                    sendVerifiedEmail(authResult.getUser());
+                    Log.d("REGISTER", "REGISTER SUCCESS"); }})
+                .addOnFailureListener(new OnFailureListener() {@Override public void onFailure(@NonNull Exception e) {
+                    Log.d("REGISTER", "REGISTER FAIL");
+                    Toast.makeText(getActivity(),"Emailนี้เคยลงทะเบียนแล้ว", Toast.LENGTH_SHORT).show();
+                }});
     }
 
     void sendVerifiedEmail(FirebaseUser _user) {
@@ -71,20 +84,16 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(getActivity(),"ERROR", Toast.LENGTH_SHORT).show();
-                Log.d("REGISTER", "SEND VERIFY FIAL");
+                Log.d("REGISTER", "SEND VERIFY FAIL");
             }
         });
-    }
-
-    void regisFirebase(String _email, String _password){
-        mAuth.createUserWithEmailAndPassword(_email,_password)
-                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {@Override public void onSuccess(AuthResult authResult) { Log.d("REGISTER", "REGISTER SUCCESS"); }})
-                .addOnFailureListener(new OnFailureListener() {@Override public void onFailure(@NonNull Exception e) {Log.d("REGISTER", "REGISTER FAIL");}});
     }
 
     void gotoLoginFrag(){
         //go to loginFrag
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new LoginFragment()).addToBackStack(null).commit();
+        FirebaseAuth _math = FirebaseAuth.getInstance();
+        _math.signOut();
         Log.d("REGISTER", "GOTO Login");
     }
 }

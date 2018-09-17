@@ -39,7 +39,7 @@ public class MenuFragment extends Fragment{
         _menuList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.d("MENU", "Click on menu ="+_menu.get(i));
+                Log.d("MENU", "Click on menu = "+_menu.get(i));
                 _menuAdapter.notifyDataSetChanged();
                 if(_menu.get(i).equals("BMI")){
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new BMIFragment()).addToBackStack(null).commit();
@@ -52,7 +52,6 @@ public class MenuFragment extends Fragment{
                     _mAuth.signOut();
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new LoginFragment()).addToBackStack(null).commit();
                 }
-
             }
         });
     }

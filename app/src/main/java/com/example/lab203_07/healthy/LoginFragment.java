@@ -32,6 +32,18 @@ public class LoginFragment extends Fragment{
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        if(mAuth.getCurrentUser() != null) {
+            Log.d("LOGIN", "CURRENT USER");
+            if(mAuth.getCurrentUser().isEmailVerified()){
+                gotoMenuFrag();
+                Log.d("LOGIN", "GO TO MENU BY : "+ mAuth.getCurrentUser().getEmail());
+            }else{
+                Toast.makeText(getActivity(), "Please verified your email", Toast.LENGTH_SHORT).show();
+                Log.d("LOGIN", "DON'T VERIFY EMAIL");
+            }
+        }
+
         initLoginBtn();
         initRegisterBtn();
     }
@@ -44,14 +56,12 @@ public class LoginFragment extends Fragment{
                 String _emailStr = ((EditText)(getView().findViewById(R.id.login_E_Mail))).getText().toString();
                 String _passwordStr = ((EditText)(getView().findViewById(R.id.login_password))).getText().toString();
 
-                FirebaseAuth mAuth = FirebaseAuth.getInstance();
                 if(_emailStr.isEmpty() || _passwordStr.isEmpty()){
-                    Toast.makeText(getActivity(), "Please fill email or password", Toast.LENGTH_SHORT).show();
-                    Log.d("LOGIN", "EMAIL OR PASS EMTHY");
+                        Toast.makeText(getActivity(), "Please fill email or password", Toast.LENGTH_SHORT).show();
+                        Log.d("LOGIN", "EMAIL OR PASS EMTHY");
                 }else{
                     login(_emailStr,_passwordStr);
                 }
-
             }
         });
     }
@@ -72,7 +82,13 @@ public class LoginFragment extends Fragment{
         mAuth.signInWithEmailAndPassword(_emailStr,_passwordStr).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
-                gotoMenuFrag();
+                if(authResult.getUser().isEmailVerified()){
+                    gotoMenuFrag();
+                    Log.d("LOGIN", "GO TO MENU BY : "+ mAuth.getCurrentUser().getEmail());
+                }else{
+                    Toast.makeText(getActivity(), "Please verified your email", Toast.LENGTH_SHORT).show();
+                    Log.d("LOGIN", "DON'T VERIFY EMAIL");
+                }
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -85,6 +101,6 @@ public class LoginFragment extends Fragment{
 
     void gotoMenuFrag(){
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view , new MenuFragment()).addToBackStack(null).commit();
-        Log.d("USER", "“GOTO MENU");
+        Log.d("USER", "GOTO MENU");
     }
 }
