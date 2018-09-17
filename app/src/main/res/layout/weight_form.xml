@@ -21,11 +21,13 @@
                 />
 
             <EditText
+                android:id="@+id/weight_form_date"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/day" />
 
             <EditText
+                android:id="@+id/weight_form_weight"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/weigth_day" />
