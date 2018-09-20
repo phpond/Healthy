@@ -33,7 +33,7 @@ public class WeightAdapter extends ArrayAdapter {
 
         Weight _row = weights.get(position);
         _date.setText(_row.getDate());
-        _weight.setText(Integer.toString( _row.getWeight()));
+        _weight.setText(Float.toString( _row.getWeight()));
         _status.setText(_row.getStatus());
         return _weightItem; //ข้อมูลที่ต้องการแสดง ณ ตำแหน่งนั้น
     }

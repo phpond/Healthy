@@ -9,7 +9,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="10dp">
 
@@ -20,16 +20,19 @@
                 android:text="Back"
                 />
 
-            <EditText
+            <TextView
+                android:textSize="19dp"
                 android:id="@+id/weight_form_date"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:paddingLeft="3dp"
                 android:hint="@string/day" />
 
             <EditText
                 android:id="@+id/weight_form_weight"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:inputType="number"
                 android:hint="@string/weigth_day" />
             <Button
                 android:id="@+id/weight_form_save_btn"

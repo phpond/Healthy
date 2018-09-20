@@ -2,16 +2,14 @@ package com.example.lab203_07.healthy;
 
 public class Weight {
     String date;
-    int weight;
-    String status;
+    float weight;
+    private String status;
 
-    public Weight() {
-    }
-
-    public Weight(String date, int weight, String status) {
+    public Weight(){}
+    public Weight(String date, float weight) {
         this.date = date;
         this.weight = weight;
-        this.status = status;
+        setStatus("UP");
     }
 
     public String getDate() {
@@ -22,11 +20,11 @@ public class Weight {
         this.date = date;
     }
 
-    public int getWeight() {
+    public float getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(float weight) {
         this.weight = weight;
     }
 
@@ -34,7 +32,8 @@ public class Weight {
         return status;
     }
 
-    public void setStatus(String status) {
+    private void setStatus(String status) {
         this.status = status;
     }
+
 }
