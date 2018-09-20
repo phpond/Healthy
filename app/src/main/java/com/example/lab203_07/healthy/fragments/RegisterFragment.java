@@ -1,4 +1,4 @@
-package com.example.lab203_07.healthy;
+package com.example.lab203_07.healthy.fragments;
 
 
 import android.support.annotation.NonNull;
@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.lab203_07.healthy.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;

@@ -1,4 +1,4 @@
-package com.example.lab203_07.healthy;
+package com.example.lab203_07.healthy.fragments;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.lab203_07.healthy.R;
 
 public class BMIFragment extends Fragment {
     @Nullable

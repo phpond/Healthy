@@ -1,8 +1,6 @@
-package com.example.lab203_07.healthy;
+package com.example.lab203_07.healthy.fragments;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -13,10 +11,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.lab203_07.healthy.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MenuFragment extends Fragment{
 
@@ -30,7 +28,6 @@ public class MenuFragment extends Fragment{
         _menu.add("Weight");
         _menu.add("Setup");
         _menu.add("Sign out");
-
         final ArrayAdapter<String> _menuAdapter = new ArrayAdapter<>(
                 getActivity(), android.R.layout.simple_list_item_1, _menu
         );
@@ -42,11 +39,14 @@ public class MenuFragment extends Fragment{
                 Log.d("MENU", "Click on menu = "+_menu.get(i));
                 _menuAdapter.notifyDataSetChanged();
                 if(_menu.get(i).equals("BMI")){
+                    _menuAdapter.clear();
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new BMIFragment()).addToBackStack(null).commit();
                 }
                 else if(_menu.get(i).equals("Weight")){
+                    _menuAdapter.clear();
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new WeightFragment()).addToBackStack(null).commit();
                 }else if(_menu.get(i).equals("Setup")){
+                    _menuAdapter.clear();
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new WeightFormFragment()).addToBackStack(null).commit();
                 }else{
                     _mAuth.signOut();
