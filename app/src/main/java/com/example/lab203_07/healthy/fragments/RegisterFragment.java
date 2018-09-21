@@ -43,16 +43,16 @@ public class RegisterFragment extends Fragment {
                 String _email = ((EditText)(getView().findViewById(R.id.register_email))).getText().toString();
                 String _password = ((EditText)(getView().findViewById(R.id.register_password))).getText().toString();
                 String _rePassword = ((EditText)(getView().findViewById(R.id.register_re_password))).getText().toString();
-
-                if(_password.length() < 6){
+                if(_email.isEmpty() || _password.isEmpty() || _rePassword.isEmpty()) {
+                    Toast.makeText(getActivity(), "กรุณากรอกข้อมูลให้ครบ", Toast.LENGTH_SHORT).show();
+                    Log.d("REGISTER", "EMPTY");
+                }
+                else if(_password.length() < 6){
                     Toast.makeText(getActivity(), "รหัสผ่านต้องมากกว่า 6 ตัวอักษร", Toast.LENGTH_SHORT).show();
                     Log.d("REGISTER", "PASSWORD LESS 6 CHAR");
                 }else if(_password.equals(_rePassword) == false){
                     Toast.makeText(getActivity(), "Password และ Re-Password ไม่ตรงกัน", Toast.LENGTH_SHORT).show();
                     Log.d("REGISTER", "PASS NOT EQUAL RE-PASS");
-                }else if(_email.isEmpty() || _password.isEmpty() || _rePassword.isEmpty()){
-                    Toast.makeText(getActivity(), "กรุณากรอกข้อมูลให้ครบ", Toast.LENGTH_SHORT).show();
-                    Log.d("REGISTER", "EMPTY");
                 }else{
                     //register
                     regisFirebase(_email,_password);

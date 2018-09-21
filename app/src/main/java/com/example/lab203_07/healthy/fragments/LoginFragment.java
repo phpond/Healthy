@@ -84,14 +84,14 @@ public class LoginFragment extends Fragment{
                     gotoMenuFrag();
                     Log.d("LOGIN", "GO TO MENU BY : "+ mAuth.getCurrentUser().getEmail());
                 }else{
-                    Toast.makeText(getActivity(), "Please verified your email", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "กรุณายืนยันอีเมล์", Toast.LENGTH_SHORT).show();
                     Log.d("LOGIN", "DON'T VERIFY EMAIL");
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getActivity(), "Please Register new account", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "อีเมล์หรือรหัสผ่านไม่ถูกต้อง", Toast.LENGTH_SHORT).show();
                 Log.d("LOGIN", "LOGIN ERROR");
             }
         });

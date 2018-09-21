@@ -34,7 +34,7 @@ public class CompareStatus {
                 .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                int position = queryDocumentSnapshots.getDocuments().size();
+                
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

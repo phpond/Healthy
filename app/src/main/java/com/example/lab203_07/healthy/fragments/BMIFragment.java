@@ -35,8 +35,8 @@ public class BMIFragment extends Fragment {
             public void onClick(View view) {
                 String _heightStr = ((EditText)(getView().findViewById(R.id.bmi_height))).getText().toString();
                 String _weightStr = ((EditText)(getView().findViewById(R.id.bmi_weight))).getText().toString();
-                if(_heightStr.isEmpty() && _weightStr.isEmpty()){
-                    Toast.makeText(getActivity(), "กรุณาระบุข้อมูลให้ครบถ้วน", Toast.LENGTH_SHORT);
+                if(_heightStr.isEmpty() || _weightStr.isEmpty()){
+                    Toast.makeText(getActivity(), "กรุณาระบุข้อมูลให้ครบถ้วน", Toast.LENGTH_SHORT).show();
                     Log.d("BMI", "FIELD NAME IS EMPTY");
                 }else{
                     Float total = Float.parseFloat(_weightStr)/((Float.parseFloat(_heightStr)/100)*(Float.parseFloat(_heightStr)/100));
