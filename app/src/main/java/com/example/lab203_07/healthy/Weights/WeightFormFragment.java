@@ -1,4 +1,4 @@
-package com.example.lab203_07.healthy.fragments;
+package com.example.lab203_07.healthy.Weights;
 
 import android.app.DatePickerDialog;
 import android.graphics.Color;
@@ -18,7 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lab203_07.healthy.R;
-import com.example.lab203_07.healthy.Weight;
+import com.example.lab203_07.healthy.fragments.MenuFragment;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;

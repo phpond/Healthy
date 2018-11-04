@@ -10,6 +10,18 @@
     <string name="btn_cal">CALCULATE</string>
     <string name="day">วันที่ชั่ง</string>
     <string name="weigth_day">น้ำหนักที่ชั่ง</string>
-    <string name="save">บันทึก</string>
+    <string name="save">SAVE</string>
     <string name="email">E-Mail</string>
+
+    <!--sleep item-->
+    <string name="add_sleep_btn">Add Sleep</string>
+    <string name="sample_date">dd-mm-yyyy</string>
+    <string name="sample_time_sleep">hh:mm - hh:mm</string>
+    <string name="sample_total_time_sleep">hh:mm</string>
+
+    <!--sleep form-->
+    <string name="back_btn">BACK</string>
+    <string name="date_to_sleep">วันที่เข้านอน</string>
+    <string name="time_to_sleep">เวลาที่เข้านอน ex. HH:MM</string>
+    <string name="time_to_wake_up">เวลาตื่นนอน ex. HH:MM</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.lab203_07.healthy.fragments;
+package com.example.lab203_07.healthy.Weights;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,8 +12,6 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.lab203_07.healthy.R;
-import com.example.lab203_07.healthy.Weight;
-import com.example.lab203_07.healthy.WeightAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;

@@ -1,4 +1,4 @@
-package com.example.lab203_07.healthy;
+package com.example.lab203_07.healthy.Weights;
 
 public class Weight {
     String date;

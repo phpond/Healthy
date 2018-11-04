@@ -2,8 +2,8 @@ package com.example.lab203_07.healthy;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
-import android.widget.ListView;
 
+import com.example.lab203_07.healthy.Weights.Weight;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;

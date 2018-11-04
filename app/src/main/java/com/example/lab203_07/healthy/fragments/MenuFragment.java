@@ -12,6 +12,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.lab203_07.healthy.R;
+import com.example.lab203_07.healthy.Sleep.SleepFormFragment;
+import com.example.lab203_07.healthy.Sleep.SleepFragment;
+import com.example.lab203_07.healthy.Weights.WeightFormFragment;
+import com.example.lab203_07.healthy.Weights.WeightFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
@@ -26,6 +30,7 @@ public class MenuFragment extends Fragment{
         super.onActivityCreated(savedInstanceState);
         _menu.add("BMI");
         _menu.add("Weight");
+        _menu.add("Sleep");
         _menu.add("Setup");
         _menu.add("Sign out");
         final ArrayAdapter<String> _menuAdapter = new ArrayAdapter<>(
@@ -48,6 +53,9 @@ public class MenuFragment extends Fragment{
                 }else if(_menu.get(i).equals("Setup")){
                     _menuAdapter.clear();
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new WeightFormFragment()).addToBackStack(null).commit();
+                }else if(_menu.get(i).equals("Sleep")){
+                    _menuAdapter.clear();
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new SleepFragment()).addToBackStack(null).commit();
                 }else{
                     _mAuth.signOut();
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new LoginFragment()).addToBackStack(null).commit();
