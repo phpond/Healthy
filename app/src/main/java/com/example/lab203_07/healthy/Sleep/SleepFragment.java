@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -31,23 +32,26 @@ public class SleepFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initAddSleepBtn();
 
         ListView _sleepList = getView().findViewById(R.id.sleep_list);
         final SleepAdapter _sleepAdapter = new SleepAdapter(getActivity(), R.layout.fragment_sleep_item, sleeps);
         _sleepAdapter.clear();
         getDataFromSql();
         _sleepList.setAdapter(_sleepAdapter);
+        _sleepList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+
+        initAddSleepBtn();
+        initSleepList(_sleepList);
 
     }
 
     public void initAddSleepBtn(){
+        Log.d("SLEEP", "Sleep btn on click");
         Button _addWeight = getView().findViewById(R.id.add_sleep_btn);
         _addWeight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new SleepFormFragment()).addToBackStack(null).commit();
-                Log.d("SLEEP", "GO TO SLEEP FORM");
+                goToSleepForm();
             }
         });
     }
@@ -69,4 +73,38 @@ public class SleepFragment extends Fragment {
         }
         myCursor.close();
     }
+
+    private void initSleepList(ListView list){
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Log.d("SLEEP", "Item position : "+position);
+
+                //create bundle
+                Bundle bundle = new Bundle();
+                bundle.putInt("_id", position);
+
+                //frag instance
+                SleepFormFragment sleepFormFrag = new SleepFormFragment();
+                sleepFormFrag.setArguments(bundle);
+
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.main_view, sleepFormFrag)
+                        .addToBackStack(null).commit();
+                Log.d("SLEEP", "GO TO SLEEP FORM");
+
+                Log.d("SLEEP", "Go to form\nBundle : "+bundle+"\nInt"+bundle.getInt("_id"));
+            }
+        });
+    }
+
+    private void goToSleepForm(){
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.main_view, new SleepFormFragment())
+                .addToBackStack(null).commit();
+        Log.d("SLEEP", "GO TO SLEEP FORM");
+    }
+
 }

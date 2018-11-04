@@ -3,6 +3,7 @@ package com.example.lab203_07.healthy.Sleep;
 import android.app.DatePickerDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -28,10 +29,16 @@ public class SleepFormFragment extends Fragment {
     String[] _month = {"ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ย.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."};
 //    String[] _month = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
+    SQLiteDatabase myDB;
+
     private int year;
     private int month;
     private int day;
     private DatePickerDialog.OnDateSetListener mDateDataListener;
+
+    int bundleInt;
+    Bundle bundle;
+    ContentValues row;
 
     @Nullable
     @Override
@@ -42,6 +49,21 @@ public class SleepFormFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        myDB = getActivity().openOrCreateDatabase("my.db",Context.MODE_PRIVATE, null);
+
+        bundle = getArguments();
+        TextView _dateT = getActivity().findViewById(R.id.sleep_form_date);
+        TextView _timeToSleepT = getView().findViewById(R.id.sleep_form_time_sleep);
+        TextView _timeToWakeT = getView().findViewById(R.id.sleep_form_time_wake_up);
+
+        Log.d("SLEEP_FORM", "Bundle : "+bundle);
+
+        if(bundle != null){
+            Log.d("SLEEP_FORM", "Get data|id: "+bundle.get("_id")+" bundle"+bundle);
+            getDataFromSql(bundle.getInt("_id"), _dateT, _timeToSleepT, _timeToWakeT);
+        }
+
         initSaveBtn();
         initDate();
         initBack();
@@ -65,10 +87,20 @@ public class SleepFormFragment extends Fragment {
                         Toast.makeText(getActivity(), "บันทึกข้อมูลไม่ครบถ้วน", Toast.LENGTH_SHORT).show();
                         Log.d("SLEEP_FORM", "Information is empty");
                     }else{
-                        saveOnDevice(_sleep);
-                        Toast.makeText(getActivity(), "บันทึกข้อมูลเรียบร้อย", Toast.LENGTH_SHORT).show();
-                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new SleepFragment()).addToBackStack(null).commit();
-                        Log.d("SLEEP_FORM", "Goto Sleep form");
+                        if(bundle != null){
+                            //update
+                            updateDB(_sleep);
+                            goToSleepForm();
+                            Toast.makeText(getActivity(), "บันทึกข้อมูลเรียบร้อย", Toast.LENGTH_SHORT).show();
+                            Log.d("SLEEP_FORM", "Goto Sleep form (Update)");
+                        }else {
+                            //insert
+                            createDb();
+                            saveOnDevice(_sleep);
+                            goToSleepForm();
+                            Toast.makeText(getActivity(), "บันทึกข้อมูลเรียบร้อย", Toast.LENGTH_SHORT).show();
+                            Log.d("SLEEP_FORM", "Goto Sleep form");
+                        }
                     }
                 }
             });
@@ -78,21 +110,8 @@ public class SleepFormFragment extends Fragment {
     }
 
     private void saveOnDevice(Sleep sleep){
-        SQLiteDatabase myDB = getActivity().openOrCreateDatabase("my.db",Context.MODE_PRIVATE, null);
-        //create database on device
-        try{
-            myDB.execSQL("CREATE TABLE IF NOT EXISTS user(_id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    " _date VARCHAR(8), " +
-                    "_timeSleep VARCHAR(5), " +
-                    "_timeWakeup VARCHAR(5))");
-            Log.d("SLEEP_FORM", "Create db Success");
-        }catch (Exception e){
-            e.printStackTrace();
-            Log.d("SLEEP_FORM", "error : "+e.toString());
-        }
-
         //create obj
-        ContentValues row = new ContentValues();
+        row = new ContentValues();
         sleep.setContentValues();
         row = sleep.getContentValues();
         Log.d("SLEEP_FORM", "Create obj Success \n Date : "+sleep.getDateToSleep()+"\nTime sleep : "+sleep.getTimeToSleep()
@@ -102,6 +121,19 @@ public class SleepFormFragment extends Fragment {
         myDB.insert("user", null, row);
         Log.d("SLEEP_FORM", "Insert on db Success");
 
+    }
+
+    private void updateDB(Sleep sleep){
+        //create obj
+        row = new ContentValues();
+        sleep.setContentValues();
+        row = sleep.getContentValues();
+        Log.d("SLEEP_FORM", "Create obj Success (Update) \n Date : "+sleep.getDateToSleep()+"\nTime sleep : "+sleep.getTimeToSleep()
+                +"\nTime wake : "+sleep.getTimeToWakeUp()+"\nTime Diff: "+sleep.getTotalSleep());
+
+        //insert
+        myDB.update("user", row,  "_id="+bundleInt, null);
+        Log.d("SLEEP_FORM", "Update on db Success");
     }
 
     void initDate(){
@@ -148,4 +180,56 @@ public class SleepFormFragment extends Fragment {
         });
     }
 
+    private void getDataFromSql(int id, TextView date, TextView timeSleep, TextView timeWake){
+        int countGetData = 0;
+        //open db
+        myDB = getActivity().openOrCreateDatabase("my.db", Context.MODE_PRIVATE, null);
+
+        //query
+        Cursor myCursor = myDB.rawQuery("SELECT * FROM user", null);
+        while(myCursor.moveToNext()){
+            if(countGetData == id){
+                String _date = myCursor.getString(1);
+                String _timeSleep = myCursor.getString(2);
+                String _timeWake = myCursor.getString(3);
+                bundleInt = myCursor.getInt(0);
+
+                date.setText(_date);
+                timeSleep.setText(_timeSleep);
+                timeWake.setText(_timeWake);
+
+                Log.d("SLEEP", "_id|Count : "+id+"|"+countGetData
+                        +" \ndate : "+_date + " Sleep : "
+                        +_timeSleep+" \nWake : "+_timeWake);
+                break;
+            }else{
+                countGetData++;
+                Log.d("SLEEP", "Count : "+countGetData);
+            }
+        }
+        myCursor.close();
+        Log.d("SLEEP_FORM", "Get data Success");
+    }
+
+    private void goToSleepForm(){
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.main_view, new SleepFragment())
+                .addToBackStack(null).commit();
+    }
+
+    private void createDb(){
+        //create database on device
+        try{
+            myDB.execSQL("CREATE TABLE IF NOT EXISTS user(_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    " _date VARCHAR(8), " +
+                    "_timeSleep VARCHAR(5), " +
+                    "_timeWakeup VARCHAR(5))");
+            Log.d("SLEEP_FORM", "Create db Success");
+        }catch (Exception e){
+            e.printStackTrace();
+            Log.d("SLEEP_FORM", "error : "+e.toString());
+        }
+
+    }
 }

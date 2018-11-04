@@ -3,15 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_margin="10dp">
+            android:layout_margin="25dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -23,13 +19,15 @@
                     android:layout_height="wrap_content"
                     android:gravity="start"
                     android:textSize="15sp"
-                    android:text="@string/sample_date"/>
+                    android:text="@string/sample_date"
+                    android:focusable="false"/>
                 <TextView
                     android:id="@+id/time_to_sleep_wake_item"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/sample_time_sleep"
-                    android:textSize="20sp"/>
+                    android:textSize="20sp"
+                    android:focusable="false"/>
 
             </LinearLayout>
             <TextView
@@ -38,8 +36,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical|end"
                 android:textSize="30sp"
-                android:text="@string/sample_total_time_sleep"/>
+                android:text="@string/sample_total_time_sleep"
+                android:focusable="false"/>
         </LinearLayout>
-    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>

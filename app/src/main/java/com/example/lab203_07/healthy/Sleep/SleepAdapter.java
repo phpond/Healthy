@@ -34,6 +34,10 @@ public class SleepAdapter extends ArrayAdapter {
         TextView _timeSleep = _sleepItem.findViewById(R.id.time_to_sleep_wake_item);
         TextView _timeDiff = _sleepItem.findViewById(R.id.total_time_sleep_item);
 
+        _date.setFocusable(false); _date.setFocusableInTouchMode(false);
+        _timeSleep.setFocusable(false); _timeSleep.setFocusableInTouchMode(false);
+        _timeDiff.setFocusable(false); _timeDiff.setFocusableInTouchMode(false);
+
         Sleep _row = _sleeps.get(position);
         _date.setText(_row.getDateToSleep());
         _timeSleep.setText(String.format("%s - %s", _row.getTimeToSleep(), _row.getTimeToWakeUp()));
