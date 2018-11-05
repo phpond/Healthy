@@ -68,9 +68,10 @@ public class Sleep {
         _wakeM = Integer.parseInt(_wakeList[1]);
 
         //cal hour
-        if(_sleepH > _wakeH ){
-            _totalH = _sleepH - _wakeH;
-        }else{
+        if(_sleepH > _wakeH){
+            //23:00 - 2:00
+            _totalH = (24-_sleepH) + _wakeH;
+        } else{
             _totalH = _wakeH - _sleepH;
         }
 

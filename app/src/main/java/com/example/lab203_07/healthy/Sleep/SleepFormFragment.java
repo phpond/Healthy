@@ -81,12 +81,14 @@ public class SleepFormFragment extends Fragment {
                     String _timeToWake = ((TextView)(getView().findViewById(R.id.sleep_form_time_wake_up))).getText().toString();
                     Log.d("SLEEP_FORM", "on click");
 
-                    Sleep _sleep = new Sleep(_date, _timeToSleep, _timeToWake);
-
                     if(_date.isEmpty() || _timeToSleep.isEmpty() || _timeToWake.isEmpty()){
                         Toast.makeText(getActivity(), "บันทึกข้อมูลไม่ครบถ้วน", Toast.LENGTH_SHORT).show();
                         Log.d("SLEEP_FORM", "Information is empty");
+                    }else if(_timeToSleep.matches("\\d{2}:\\d{2}") == false || _timeToWake.matches("\\d{2}:\\d{2}") == false){
+                        Toast.makeText(getActivity(), "กรุณากรอกตาม format HH:MM", Toast.LENGTH_SHORT).show();
+                        Log.d("SLEEP_FORM", "invalid format");
                     }else{
+                        Sleep _sleep = new Sleep(_date, _timeToSleep, _timeToWake);
                         if(bundle != null){
                             //update
                             updateDB(_sleep);
@@ -96,9 +98,9 @@ public class SleepFormFragment extends Fragment {
                         }else {
                             //insert
                             createDb();
-                            saveOnDevice(_sleep);
+//                            saveOnDevice(_sleep);
                             goToSleepForm();
-                            Toast.makeText(getActivity(), "บันทึกข้อมูลเรียบร้อย", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "บันทึกข้อมูลเรียบร้อย"+_sleep.getTotalSleep(), Toast.LENGTH_SHORT).show();
                             Log.d("SLEEP_FORM", "Goto Sleep form");
                         }
                     }
