@@ -60,6 +60,17 @@ public class SleepFragment extends Fragment {
         //open db
         myDB = getActivity().openOrCreateDatabase("my.db", Context.MODE_PRIVATE, null);
 
+        try{
+            myDB.execSQL("CREATE TABLE IF NOT EXISTS user(_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    " _date VARCHAR(8), " +
+                    "_timeSleep VARCHAR(5), " +
+                    "_timeWakeup VARCHAR(5))");
+            Log.d("SLEEP_FORM", "Create db Success");
+        }catch (Exception e){
+            e.printStackTrace();
+            Log.d("SLEEP_FORM", "error : "+e.toString());
+        }
+
         //query
         Cursor myCursor = myDB.rawQuery("SELECT * FROM user", null);
         while(myCursor.moveToNext()){
