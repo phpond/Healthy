@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp">
+
+    <TextView
+        android:id="@+id/id_post_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="1"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:id="@+id/colon_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text=":"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@+id/id_post_comment"
+        />
+    <TextView
+        android:id="@+id/id_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="@string/sample_time_sleep"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@+id/colon_comment"
+        />
+
+    <TextView
+        android:id="@+id/body_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="@string/sample_time_sleep"
+        app:layout_constraintTop_toBottomOf="@+id/id_post_comment"
+        />
+
+    <TextView
+        android:id="@+id/name_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="@string/sample_time_sleep"
+        app:layout_constraintTop_toBottomOf="@+id/body_comment"
+        />
+    <TextView
+        android:id="@+id/email_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="@string/sample_time_sleep"
+        app:layout_constraintTop_toBottomOf="@+id/name_comment"
+        />
+
+</android.support.constraint.ConstraintLayout>
